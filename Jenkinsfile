@@ -1,9 +1,12 @@
 pipeline {
     agent {
-        kubernetes { label 'maven-sonar-scanner' }
+        kubernetes { label 'default' }
     }
     stages {
         stage('Maven Build') {
+            agent {
+                kubernetes { label 'maven-sonar-scanner' }
+            }
             steps {
                 // Maven build
                 sh '''
@@ -16,6 +19,9 @@ pipeline {
             }
         }
         stage('Sonarqube Analysis') {
+            agent {
+                kubernetes { label 'maven-sonar-scanner' }
+            }
             steps {
                 // Sonarqube Analysis
                 withSonarQubeEnv('sonarqube') {
