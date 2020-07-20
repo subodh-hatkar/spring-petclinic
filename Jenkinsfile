@@ -46,7 +46,7 @@ pipeline {
         }
         stage('OWASP Dependency Check') {
             agent {
-                kubernetes { label 'owasp' }
+                kubernetes { label 'owasp-dependency-check' }
             }
             steps {
                 // OWASP Dependency Check
